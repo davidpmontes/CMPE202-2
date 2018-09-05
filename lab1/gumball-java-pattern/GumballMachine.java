@@ -1,33 +1,59 @@
-
+/**
+* The Gumball Machine class implements an application that
+* could sells gumballs to customers. 
+*
+* There are 3 types of gumball machine:
+* 1. Gumballs sells at 25 cents, only accept quarter.
+* 2. Gumballs sells at 50 cents, only accept quarter.
+* 3. Gumballs sells at 50 cents, accept kind of coins.
+* Create an specfic type of gumball machine by specificy the
+* type parameter of the constructor
+*
+* @author  Jinzhou Tao
+*/
 
 public class GumballMachine {
  
-	State soldOutState;
-	State noQuarterState;
-	State hasQuarterState;
-	State soldState;
- 
-	State state = soldOutState;
-	int count = 0;
- 
-	public GumballMachine(int numberGumballs) {
-		soldOutState = new SoldOutState(this);
-		noQuarterState = new NoQuarterState(this);
-		hasQuarterState = new HasQuarterState(this);
-		soldState = new SoldState(this);
+	IState soldOutState;
+	IState readyState;
+	IState hasCoinState;
+	IState soldState;
+    IState state;
+    CoinChecker coinChecker;
 
-		this.count = numberGumballs;
+    private int count = 0;
+    private int price = 0;
+    private int insertedCoin = 0;
+ 
+	public GumballMachine(int numberGumballs, int type) {
+		soldOutState = new SoldOutState(this);
+		readyState = new ReadyState(this);
+		hasCoinState = new HasCoinState(this);
+        soldState = new SoldState(this);
+        coinChecker = new CoinChecker(type);
+
+        this.count = numberGumballs;
+        if (type==1) {
+            this.price = 25;
+        } else {
+            this.price = 50;
+        }
+
  		if (numberGumballs > 0) {
-			state = noQuarterState;
+			state = readyState;
 		} 
 	}
  
-	public void insertQuarter() {
-		state.insertQuarter();
+	public void insertCoin(int coin) {
+        if (coinChecker.check(coin)) {
+            state.insertCoin(coin);
+            this.insertedCoin += coin;
+        }
 	}
  
-	public void ejectQuarter() {
-		state.ejectQuarter();
+	public void ejectCoin() {
+        state.ejectCoin();
+        this.insertedCoin = 0;
 	}
  
 	public void turnCrank() {
@@ -35,45 +61,48 @@ public class GumballMachine {
 		state.dispense();
 	}
 
-	void setState(State state) {
-		this.state = state;
+	void setState(char state) {
+		switch (state) {
+            case 'r':
+                this.state = readyState;
+                break;
+            case 'h':
+                this.state = hasCoinState;
+                break;
+            case 's':
+                this.state = soldState;
+                break;
+            case 'o':
+                this.state = soldOutState;
+                break;
+            default:
+                this.state = readyState;
+                break;
+        }
+    }
+    
+    int getCount() {
+		return this.count;
 	}
+
+    int getPrice() {
+        return this.price; 
+    }
+
+    int getCoin() {
+        return this.insertedCoin; 
+    }
  
 	void releaseBall() {
-		System.out.println("A gumball comes rolling out the slot...");
-		if (count != 0) {
-			count = count - 1;
-		}
-	}
- 
-	int getCount() {
-		return count;
+        System.out.println("A gumball comes rolling out the slot...");
+        insertedCoin = insertedCoin - price;
+		count = count - 1;
 	}
  
 	void refill(int count) {
 		this.count = count;
-		state = noQuarterState;
+		this.state = readyState;
 	}
-
-    public State getState() {
-        return state;
-    }
-
-    public State getSoldOutState() {
-        return soldOutState;
-    }
-
-    public State getNoQuarterState() {
-        return noQuarterState;
-    }
-
-    public State getHasQuarterState() {
-        return hasQuarterState;
-    }
-
-    public State getSoldState() {
-        return soldState;
-    }
  
 	public String toString() {
 		StringBuffer result = new StringBuffer();
