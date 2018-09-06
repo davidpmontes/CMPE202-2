@@ -24,30 +24,55 @@ public class GumballMachine {
     private int count = 0;
     private int price = 0;
     private int insertedCoin = 0;
+    private int maximumCoin = 0;
  
 	public GumballMachine(int numberGumballs, int type) {
-		soldOutState = new SoldOutState(this);
-		readyState = new ReadyState(this);
-		hasCoinState = new HasCoinState(this);
-        soldState = new SoldState(this);
-        coinChecker = new CoinChecker(type);
+        this.soldOutState = new SoldOutState(this);
+        this.readyState = new ReadyState(this);
+        this.hasCoinState = new HasCoinState(this);
+        this.soldState = new SoldState(this);
+        this.coinChecker = new CoinChecker(type);
+        this.state = readyState;
 
         this.count = numberGumballs;
-        if (type==1) {
-            this.price = 25;
-        } else {
-            this.price = 50;
+        switch (type) {
+            case 2:
+                this.price = 50;
+                this.maximumCoin = 50;
+                this.coinChecker = new CoinChecker(1);
+                break;
+            
+            case 3:
+                this.price = 50;
+                this.maximumCoin = 0;
+                this.coinChecker = new CoinChecker(2);
+                break;
+            default:    
+            case 1:
+                this.price = 25;
+                this.maximumCoin = 25;
+                this.coinChecker = new CoinChecker(1);
+                break;
         }
 
- 		if (numberGumballs > 0) {
-			state = readyState;
-		} 
+        if (type==1) {
+            
+        } else if (type==2) {
+            
+        } else {
+
+        }
 	}
  
 	public void insertCoin(int coin) {
         if (coinChecker.check(coin)) {
-            state.insertCoin(coin);
-            this.insertedCoin += coin;
+            if (this.maximumCoin > 0 && this.insertedCoin + coin > this.maximumCoin) {
+                System.out.println("You've inserted too many coins. Coin returned.");
+            } else {
+                state.insertCoin(coin);
+                this.insertedCoin += coin;
+            }
+            
         }
 	}
  

@@ -11,8 +11,8 @@ public class Main {
 		gumballMachine1.insertCoin( 25 );
         gumballMachine1.turnCrank();
         
+        // Test coin over insert
 		gumballMachine1.insertCoin( 25 );
-		gumballMachine1.turnCrank();
 		gumballMachine1.insertCoin( 25 );
         gumballMachine1.turnCrank();
         
