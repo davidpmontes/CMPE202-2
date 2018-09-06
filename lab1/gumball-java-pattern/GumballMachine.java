@@ -47,7 +47,8 @@ public class GumballMachine {
                 this.maximumCoin = 0;
                 this.coinChecker = new CoinChecker(2);
                 break;
-            default:    
+            default:
+                System.out.println("Unknown gumball machine type. Default type 1 gumball machine created.");
             case 1:
                 this.price = 25;
                 this.maximumCoin = 25;

@@ -51,8 +51,9 @@ public class GumballMachine {
             this.allowedCoin.put(25, true);
             this.allowedCoin.put(100, false);
             break;
-        case 1:
         default:
+            System.out.println("Unknown gumball machine type. Default type 1 gumball machine created.");
+        case 1:
             this.gumballPrice = 25;
             this.maximumCoin = 25;
             this.allowedCoin.put(1, false);
