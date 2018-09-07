@@ -1,6 +1,6 @@
 
 
-public class ReadyState implements IState {
+public class ReadyState implements State {
     GumballMachine gumballMachine;
  
     public ReadyState(GumballMachine gumballMachine) {

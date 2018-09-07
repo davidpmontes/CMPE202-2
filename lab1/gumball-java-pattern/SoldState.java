@@ -1,6 +1,6 @@
 
 
-public class SoldState implements IState {
+public class SoldState implements State {
  
     GumballMachine gumballMachine;
  

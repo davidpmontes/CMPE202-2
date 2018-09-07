@@ -14,15 +14,15 @@
 
 public class GumballMachine {
  
-	IState soldOutState;
-	IState readyState;
-	IState hasCoinState;
-	IState soldState;
-    IState state;
+	State soldOutState;
+	State readyState;
+	State hasCoinState;
+	State soldState;
+    State state;
     CoinChecker coinChecker;
 
-    private int count = 0;
-    private int price = 0;
+    private int gumballNum = 0;
+    private int gumballPrice = 0;
     private int insertedCoin = 0;
     private int maximumCoin = 0;
  
@@ -34,34 +34,26 @@ public class GumballMachine {
         this.coinChecker = new CoinChecker(type);
         this.state = readyState;
 
-        this.count = numberGumballs;
+        this.gumballNum = numberGumballs;
         switch (type) {
             case 2:
-                this.price = 50;
+                this.gumballPrice = 50;
                 this.maximumCoin = 50;
                 this.coinChecker = new CoinChecker(1);
                 break;
             
             case 3:
-                this.price = 50;
+                this.gumballPrice = 50;
                 this.maximumCoin = 0;
                 this.coinChecker = new CoinChecker(2);
                 break;
             default:
                 System.out.println("Unknown gumball machine type. Default type 1 gumball machine created.");
             case 1:
-                this.price = 25;
+                this.gumballPrice = 25;
                 this.maximumCoin = 25;
                 this.coinChecker = new CoinChecker(1);
                 break;
-        }
-
-        if (type==1) {
-            
-        } else if (type==2) {
-            
-        } else {
-
         }
 	}
  
@@ -73,7 +65,6 @@ public class GumballMachine {
                 state.insertCoin(coin);
                 this.insertedCoin += coin;
             }
-            
         }
 	}
  
@@ -108,11 +99,11 @@ public class GumballMachine {
     }
     
     int getCount() {
-		return this.count;
+		return this.gumballNum;
 	}
 
     int getPrice() {
-        return this.price; 
+        return this.gumballPrice; 
     }
 
     int getCoin() {
@@ -121,12 +112,12 @@ public class GumballMachine {
  
 	void releaseBall() {
         System.out.println("A gumball comes rolling out the slot...");
-        insertedCoin = insertedCoin - price;
-		count = count - 1;
+        insertedCoin = insertedCoin - gumballPrice;
+		gumballNum = gumballNum - 1;
 	}
  
-	void refill(int count) {
-		this.count = count;
+	void refill(int gumballNum) {
+		this.gumballNum = gumballNum;
 		this.state = readyState;
 	}
  
@@ -134,8 +125,8 @@ public class GumballMachine {
 		StringBuffer result = new StringBuffer();
 		result.append("\nMighty Gumball, Inc.");
 		result.append("\nJava-enabled Standing Gumball Model #2004");
-		result.append("\nInventory: " + count + " gumball");
-		if (count != 1) {
+		result.append("\nInventory: " + gumballNum + " gumball");
+		if (gumballNum != 1) {
 			result.append("s");
 		}
 		result.append("\n");

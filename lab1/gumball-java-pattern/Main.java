@@ -50,6 +50,9 @@ public class Main {
         // Test insufficent gumball
         gumballMachine3.insertCoin( 100 );
         gumballMachine3.turnCrank();
+
+        // Test initiate a invalid type gumballmachine
+        GumballMachine gumballMachine4 = new GumballMachine(1, 4);
         
 	}
 }

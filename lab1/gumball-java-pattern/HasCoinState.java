@@ -1,5 +1,5 @@
 
-public class HasCoinState implements IState {
+public class HasCoinState implements State {
 	GumballMachine gumballMachine;
  
 	public HasCoinState(GumballMachine gumballMachine) {

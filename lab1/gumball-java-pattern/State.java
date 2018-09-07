@@ -1,6 +1,6 @@
 
 
-public interface IState {
+public interface State {
  
 	public void insertCoin(int coin);
 	public void ejectCoin();
