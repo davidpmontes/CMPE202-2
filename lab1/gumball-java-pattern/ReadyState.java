@@ -9,7 +9,7 @@ public class ReadyState implements State {
  
 	public void insertCoin(int coin) {
 		System.out.printf("You inserted a coin of %d cent%s.%n", coin, coin>1?"s":"");
-		gumballMachine.setState('h');
+		gumballMachine.setState(gumballMachine.getHasCoinState());
 	}
  
 	public void ejectCoin() {

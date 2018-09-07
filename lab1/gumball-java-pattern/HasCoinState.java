@@ -11,14 +11,14 @@ public class HasCoinState implements State {
 	}
  
 	public void ejectCoin() {
-		System.out.println("Coin returned.");
-        gumballMachine.setState('r');
+		System.out.printf ("Coins of %d cents returned.%n", gumballMachine.getCoin());
+        gumballMachine.setState(gumballMachine.getReadyState());
 	}
  
 	public void turnCrank() {
         System.out.println("You turned...");
         if (gumballMachine.getCoin()>=gumballMachine.getPrice()) {
-            gumballMachine.setState('s');
+            gumballMachine.setState(gumballMachine.getSoldState());
         }
 	}
 

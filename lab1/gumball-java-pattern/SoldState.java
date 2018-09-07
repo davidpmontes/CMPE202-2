@@ -23,14 +23,14 @@ public class SoldState implements State {
 	public void dispense() {
 		if (gumballMachine.getCount() > 0) {
             if (gumballMachine.getCoin()==gumballMachine.getPrice()) {
-                gumballMachine.setState('r');
+                gumballMachine.setState(gumballMachine.getReadyState());
             } else {
-                gumballMachine.setState('h');
+                gumballMachine.setState(gumballMachine.getHasCoinState());
             }
             gumballMachine.releaseBall();
 		} else {
 			System.out.println("Oops, out of gumballs!");
-			gumballMachine.setState('o');
+			gumballMachine.setState(gumballMachine.getSoldOutState());
 		}
 	}
  
