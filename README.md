@@ -11,3 +11,11 @@ Student: Jinzhou Tao
 ## Lab2 - UML Reverse Engineering
 
 [counter-burger-uml]()
+
+## Lab3 - Design Pattern
+
+[obeserver]()
+
+## Lab2 - Ding Tai Feng CRC Card
+
+[dingtaifeng]()
