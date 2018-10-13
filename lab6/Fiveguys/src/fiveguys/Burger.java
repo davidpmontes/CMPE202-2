@@ -1,13 +1,17 @@
 package fiveguys;
 
-public class Burger implements ICompositeOrderItem {
+import java.util.ArrayList;
+import java.util.List;
+
+public class Burger implements IOrderItem {
 
     private String description;
     private int quantity;
     private double price;
-    private Topping toppings;
+    private List<Topping> toppings;
 
     public Burger(String description, double price) {
+        this.toppings = new ArrayList<>();
         this.description = description;
         this.price = price;
         this.quantity = 1;
@@ -28,18 +32,11 @@ public class Burger implements ICompositeOrderItem {
         return description;
     }
 
-    @Override
-    public void addChild(ICompositeOrderItem component) {
-        if (component instanceof Topping) {
-            if (toppings != null) {
-                component.addChild(toppings);
-            }
-            this.toppings = (Topping) component;
-        }
+    public void addTopping(Topping item) {
+        toppings.add(item);
     }
 
-    @Override
-    public ICompositeOrderItem getChild() {
+    public List<Topping> getToppings() {
         return toppings;
     }
 }

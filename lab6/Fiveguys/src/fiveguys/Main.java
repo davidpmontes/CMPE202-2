@@ -6,11 +6,11 @@ public class Main {
         Order order = new Order();
 
         Burger burger = new Burger("LBB",5.59);
-        burger.addChild(new Topping("LETTUCE",ToppingPosition.TOP));
-        burger.addChild(new Topping("TOMATO",ToppingPosition.TOP));
-        burger.addChild(new Topping("G ONION",ToppingPosition.MIDDLE));
-        burger.addChild(new Topping("JALA Grilled",ToppingPosition.MIDDLE));
-        burger.addChild(new Topping("BACON",ToppingPosition.BOTTOM));
+        burger.addTopping(new Topping("BACON",ToppingPosition.BOTTOM));
+        burger.addTopping(new Topping("LETTUCE",ToppingPosition.TOP));
+        burger.addTopping(new Topping("TOMATO",ToppingPosition.TOP));
+        burger.addTopping(new Topping("G ONION",ToppingPosition.MIDDLE));
+        burger.addTopping(new Topping("JALA Grilled",ToppingPosition.MIDDLE));
         Fries fries = new Fries("LTL CAJ", 2.79);
 
         order.addItem(burger);

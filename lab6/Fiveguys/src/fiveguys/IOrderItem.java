@@ -2,10 +2,10 @@ package fiveguys;
 
 public interface IOrderItem {
 
-    Integer getQuantity();
-
     String getDescription();
 
-    Double getPrice();
+    default Integer getQuantity() { return null; };
+
+    default Double getPrice() { return null; };
 
 }

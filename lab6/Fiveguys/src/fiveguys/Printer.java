@@ -1,8 +1,8 @@
 package fiveguys;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 enum PrintStrategy {
     RECEIPT, PACKAGING
@@ -38,8 +38,8 @@ abstract class PrintBuilder {
     protected PrintBuilder printDetail(Order order) {
         for (IOrderItem item : order.getItems()) {
             this.printItem(item);
-            if (item instanceof ICompositeOrderItem)
-                this.printSubItems(((ICompositeOrderItem) item).getChild());
+            if (item instanceof Burger)
+                this.printToppings(((Burger) item).getToppings());
         }
         return this;
     };
@@ -96,22 +96,17 @@ abstract class PrintBuilder {
                 .println(String.format("%6.2f",item.getPrice()));
     }
 
-    protected PrintBuilder printSubItems(ICompositeOrderItem item) {
-        while (item!=null) {
-            if (item instanceof Topping)
-                this.printOnLeft(wrapTopping((Topping) item), 4);
-            else
-                this.printOnLeft(item.getDescription(),4);
-            item = item.getChild();
+    protected PrintBuilder printToppings(List<Topping> items) {
+        for (Topping item: items) {
+            this.printOnLeft(wrapTopping(item), 4);
         }
         return this;
     }
 
-    protected PrintBuilder printToppings(Topping item, ToppingPosition filter) {
-        while (item!=null) {
-            if (item.getPosition()==filter)
-                this.printOnLeft(wrapTopping((Topping) item), 4);
-            item = (Topping) item.getChild();
+    protected PrintBuilder printToppings(List<Topping> items, ToppingPosition filter) {
+        for (Topping item: items) {
+            if (item.getPosition() == filter)
+                this.printOnLeft(wrapTopping(item), 4);
         }
         return this;
     }
@@ -232,18 +227,11 @@ public class Printer {
         }
 
         @Override
-        protected PrintBuilder printDetail(Order order) {
-            for (IOrderItem item : order.getItems()) {
-                this.printItem(item);
-                if (item instanceof Burger){
-                    Topping topping = (Topping) ((Burger) item).getChild();
-                    this.printToppings(topping, ToppingPosition.TOP)
-                        .printToppings(topping, ToppingPosition.MIDDLE)
-                        .printToppings(topping, ToppingPosition.BOTTOM);
-                } else if (item instanceof ICompositeOrderItem)
-                    this.printSubItems(((ICompositeOrderItem) item).getChild());
-            }
-            return this;
+        protected PrintBuilder printToppings(List<Topping> topping) {
+            return this
+                    .printToppings(topping, ToppingPosition.TOP)
+                    .printToppings(topping, ToppingPosition.MIDDLE)
+                    .printToppings(topping, ToppingPosition.BOTTOM);
         }
     };
 
