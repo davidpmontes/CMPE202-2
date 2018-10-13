@@ -1,18 +1,26 @@
 package fiveguys;
 
-public class Burger implements IComponent {
+public class Burger implements ICompositeOrderItem {
 
     private String description;
+    private int quantity;
     private double price;
-    private Toppings toppings;
+    private Topping toppings;
 
     public Burger(String description, double price) {
         this.description = description;
         this.price = price;
+        this.quantity = 1;
     }
 
+    @Override
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    @Override
     public Double getPrice() {
-        return price;
+        return price*quantity;
     }
 
     @Override
@@ -21,17 +29,17 @@ public class Burger implements IComponent {
     }
 
     @Override
-    public void addSubComponent(IComponent component) {
-        if (component instanceof Toppings) {
+    public void addChild(ICompositeOrderItem component) {
+        if (component instanceof Topping) {
             if (toppings != null) {
-                component.addSubComponent(toppings);
+                component.addChild(toppings);
             }
-            this.toppings = (Toppings) component;
+            this.toppings = (Topping) component;
         }
     }
 
     @Override
-    public IComponent getSubComponent() {
+    public ICompositeOrderItem getChild() {
         return toppings;
     }
 }

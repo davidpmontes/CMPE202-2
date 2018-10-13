@@ -1,4 +1,7 @@
 bin/
+out/
+
+.vscode/
 
 .bak
 .class

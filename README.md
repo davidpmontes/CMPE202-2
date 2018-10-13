@@ -4,18 +4,12 @@ Student: Jinzhou Tao
 
 ## Lab1 - Code maintainability
 
-[Gumball-java-typical]()
-[Gumball-java-pattern]()
-
-
 ## Lab2 - UML Reverse Engineering
-
-[counter-burger-uml]()
 
 ## Lab3 - Design Pattern
 
-[obeserver]()
+## Lab4 - Ding Tai Feng CRC Card
 
-## Lab2 - Ding Tai Feng CRC Card
+## Lab5 - Five Guys Activity Design
 
-[dingtaifeng]()
+## Lab6 - Five Guys Design Patterns
