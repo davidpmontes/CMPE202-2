@@ -1,58 +1,58 @@
-  
 
 public class BuildOrder {
 
-    public static Component getOrder()
-    {
-        Composite order = new Composite( "Order" ) ;
-        order.addChild(new Leaf("Crispy Onion Strings", 5.50 ));
-        order.addChild(new Leaf("The Purist", 8.00 ));
+    public static IComposite getOrder() {
+        Composite order = new Order();
 
-        CustomBurger customBurger = new CustomBurger( "Build Your Own Burger" ) ;
-        // base price for 1/3 lb
-        Burger b = new Burger( "Burger Options" ) ;
-        String[] bo = { "Beef", "1/3lb.", "On A Bun" } ;
-        b.setOptions( bo ) ;
-        // 1 cheese free, extra cheese +1.00
-        Cheese c = new Cheese( "Cheese Options" ) ;
-        String[] co = { "Danish Blue Cheese", "Horseradish Cheddar" } ;
-        c.setOptions( co ) ;
-        c.wrapDecorator( b ) ;
-        // 4 toppings free, extra +.75
-        Toppings t = new Toppings( "Toppings Options" ) ;
-        String[] to = { "Bermuda Red Onion", "Black Olives", "Carrot Strings", "Coleslaw" } ;
-        t.setOptions( to ) ;
-        t.wrapDecorator( c ) ;
-        // premium topping +1.50
-        Premium p = new Premium( "Premium Options" ) ;
-        String[] po = { "Applewood Smoked Bacon" } ;
-        p.setOptions( po ) ;
-        p.wrapDecorator( t ) ;
-        // 1 sauce free, extra +.75
-        Sauce s = new Sauce( "Sauce Options" ) ;
-        String[] so = { "Appricot Sauce" } ;
-        s.setOptions( so ) ;
-        s.wrapDecorator( p ) ;
-        
+        CustomBurger customBurger = new CustomBurger();
+
+        String[] bo = { "Organic Bison*", "1/2lb.", "On A Bun" };
+        String[] co = { "Yellow American", "Spicy Jalapeno Jack" };
+        String[] pco = { "Danish Blue Cheese" };
+        String[] so = { "Mayonnaise", "Thai Peanuts Sauce" };
+        String[] to = { "Black Olives", "Spicy Pickles", "Dill Pickle Chips" };
+        String[] pto = { "Marinated Tomatoes" };
+        String[] buo = { "Ciabatta (Vegan)" };
+        String[] sio = { "Shoestring Fries"};
+
         // Setup Custom Burger Ingredients
-        customBurger.setDecorator( s ) ;
-        customBurger.addChild( b ) ;
-        customBurger.addChild( c ) ;
-        customBurger.addChild( t ) ;
-        customBurger.addChild( p ) ;
-        customBurger.addChild( s ) ;
-        
-        // Add Custom Burger to the ORder
-        order.addChild( customBurger );
-        return order ;
+        customBurger.addChild(new Burger(bo));
+        customBurger.addChild(new Cheese(co));
+        customBurger.addChild(new PremiumCheese(pco));
+        customBurger.addChild(new Sauce(so));
+        customBurger.addChild(new Toppings(to));
+        customBurger.addChild(new PremiumToppings(pto));
+        customBurger.addChild(new Bun(buo));
+        customBurger.addChild(new Sides(sio));
+
+        // Add Custom Burger to the Order
+        order.addChild(customBurger);
+
+        customBurger = new CustomBurger();
+
+        String[] bo2 = { "Hormone & Antibiotics Free Beef*", "1/3lb.", "On A Bun" };
+        String[] co2 = { "Greek Feta", "Smoked Gouda" };
+        String[] pco2 = { "Fresh Mozzarella" };
+        String[] so2 = { "Habanero Salsa" };
+        String[] to2 = { "Crushed Peanuts" };
+        String[] pto2 = { "Marinated Tomatoes", "Sunny Side Up Egg*" };
+        String[] buo2 = { "Gluten-Free Bun" };
+        String[] sio2 = { "Shoestring Fries"};
+
+        // Setup Custom Burger Ingredients
+        customBurger.addChild(new Burger(bo2));
+        customBurger.addChild(new Cheese(co2));
+        customBurger.addChild(new PremiumCheese(pco2));
+        customBurger.addChild(new Sauce(so2));
+        customBurger.addChild(new Toppings(to2));
+        customBurger.addChild(new PremiumToppings(pto2));
+        customBurger.addChild(new Bun(buo2));
+        customBurger.addChild(new Sides(sio2));
+
+        // Add Custom Burger to the Order
+        order.addChild(customBurger);
+
+        return order;
     }
 
 }
-
-
-/*
-
-Counter Burger Menu:
-https://thecounterburger.emn8.com/?store=Times%20Square
-
-*/

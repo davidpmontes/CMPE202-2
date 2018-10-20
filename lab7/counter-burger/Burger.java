@@ -1,34 +1,26 @@
-public class Burger extends LeafDecorator
-{
-    private String[] options ;
-    
-    
-    public Burger( String d )
-    {
-        super(d) ;
+public class Burger extends PricedComponent {
+
+    public Burger(String[] options) {
+        super("Burger Option");
+        setOptions(options);
     }
-    
-    public void setOptions( String[] options )
-    {
-        this.options = options ;
-        for ( int i = 0; i<options.length; i++ )
-        {
-            if ( "1/3lb.".equals(options[i]) ) this.price += 9.50 ;
-            if ( "2/3lb.".equals(options[i]) ) this.price += 11.50 ;
-            if ( "1lb.".equals(options[i]) ) this.price += 15.50 ;
-            if ( "In A Bowl".equals(options[i]) ) this.price += 1.50 ;
+
+    public void setOptions(String[] options) {
+        super.setOptions(options);
+        for (String option : options) {
+            if ("1/3lb.".equals(option))
+                this.price += 9.00;
+            if ("1/2lb.".equals(option))
+                this.price += 12.00;
+            if ("1lb.".equals(option))
+                this.price += 18.00;
+            if ("In A Bowl".equals(option))
+                this.price += 1.00;
+            if ("Organic Bison*".equals(option))
+                this.price += 4.00;
+            if ("Ahi Tuna*".equals(option))
+                this.price += 4.00;
         }
     }
-    
-    public String getDescription() 
-    {
-        String desc = "   " ;
-        for ( int i = 0; i<options.length; i++ )
-        {
-            if (i>0) desc += " + " + options[i] ;
-            else desc = options[i] ;
-        }        
-        return desc ;
-    }
-    
+
 }

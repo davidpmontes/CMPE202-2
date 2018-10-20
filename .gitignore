@@ -2,6 +2,7 @@ bin/
 out/
 
 .vscode/
+.idea/
 
 .bak
 .class
