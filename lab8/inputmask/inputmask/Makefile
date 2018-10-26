@@ -5,28 +5,28 @@ clean:
 	rm -rf build/*
 
 init:
-	gradle init
+	./gradlew init
 	mkdir -p libs
 	mkdir -p src/main/java
 	mkdir -p src/test/java
 
 compile:
-	gradle build -x test --warning-mode all
+	./gradlew build -x test --warning-mode all
 
 test:
-	gradle test
+	./gradlew test
 
 jar: compile
-	gradle shadowJar
+	./gradlew shadowJar
 
 checkstyle:
-	gradle check
+	./gradlew check
 	
 spotbugs:
-	gradle spotbugsMain
+	./gradlew spotbugsMain
 
 codesmells:
-	gradle smartsmells
+	./gradlew smartsmells
 
 run: jar
 	java -cp build/libs/inputmask-all.jar Main

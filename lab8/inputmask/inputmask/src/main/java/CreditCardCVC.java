@@ -4,17 +4,23 @@ public class CreditCardCVC implements IDisplayComponent, IKeyEventHandler
 {
 
 	private IKeyEventHandler nextHandler ;
-	private String cvc = "" ;
+    private String cvc = "" ;
+    private static final int NUM_LEN = 3;
 
     public void setNext( IKeyEventHandler next) {
     	this.nextHandler = next ;
     }	
 
 	public String display() {
-		if ( cvc.equals("") )
-			return "[123]" + "  " ;
-		else
-			return "[" + cvc + "]" + "  " ;
+        StringBuilder out = new StringBuilder();
+        out.append('[');
+        out.append(cvc);
+        for (int i = 0; i < NUM_LEN - cvc.length(); i++) {
+            out.append('*');
+        }
+        out.append(']');
+        out.append(' ');
+        return out.toString();
 	}	
 
 	public void key(String ch, int cnt) {

@@ -11,10 +11,16 @@ public class CreditCardExp implements IDisplayComponent, IKeyEventHandler
     }	
 
 	public String display() {
-		if ( date.equals("") )
-			return "[MM/YY]" + "  " ;
-		else
-			return "[" + date + "]" + "  " ;
+        StringBuilder out = new StringBuilder();
+        out.append("[MM/YY] ");
+        for (int i = 0; i < date.length(); i++) {
+            if (i<=1) {
+                out.setCharAt(i+1, date.charAt(i));
+            } else {
+                out.setCharAt(i+2, date.charAt(i));
+            }
+        }
+        return out.toString();
 	}	
 
 	public void key(String ch, int cnt) {
